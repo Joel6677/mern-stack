@@ -1,4 +1,6 @@
 import Device from './components/Device'
+import DeviceIssueForm from './components/DeviceIssueForm'
+
 import { useState } from 'react'
 
 const App = (props) => {
