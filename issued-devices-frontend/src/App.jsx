@@ -1,5 +1,6 @@
 import Device from './components/Device'
 import DeviceIssueForm from './components/DeviceIssueForm'
+import DeviceList from './components/DeviceList'
 
 import { useState } from 'react'
 
@@ -31,7 +32,8 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Devices</h1>
+      <DeviceList devices={devices}/>
+      {/* <h1>Devices</h1>
       <ul>
         {devices.map(device => 
           <Device key={device.id} device={device} />
@@ -43,7 +45,7 @@ const App = (props) => {
         onChange={handleDeviceChange}
         />
         <button type="submit">save</button>
-      </form>  
+      </form>   */}
     </div>
   )
 }

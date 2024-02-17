@@ -1,6 +1,8 @@
+import { ListGroup } from 'react-bootstrap';
+
 const Device = ({ device }) => {
     return (
-      <li>{device.name}</li>
+      <ListGroup.Item action>{device.name}</ListGroup.Item>
     )
   }
   
