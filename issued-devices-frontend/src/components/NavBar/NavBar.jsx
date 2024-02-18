@@ -10,6 +10,11 @@ const padding = {
 
 const NavBar = () => {
 
+    const onSubmit = (event) => {
+        event.preventDefault()
+        console.log('search')
+    }
+
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="primary">
@@ -26,7 +31,7 @@ const NavBar = () => {
                             <Link style={padding} to="/deviceIssueForm">Device Issuance Form</Link>
                         </Nav.Link>
                         <NavItem>
-                            <Form inline>
+                            <Form onSubmit={onSubmit} inline="true">
                                 <Row>
                                     <Col xs="auto">
                                         <Form.Control
