@@ -14,7 +14,11 @@ mongoose.connect(url)
     })
 
 const deviceSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        minlength: 1,
+        required: true
+    },
     manufacturer: String,
     number: Number,
     recipient_id: Number,
