@@ -2,6 +2,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import {
+  BrowserRouter as Router,
+} from "react-router-dom"
+
 const devices = [
   {
     id: 1,
@@ -55,5 +59,7 @@ const recipients= [
 ]
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <App devices={devices} />
+  <Router>
+    <App devices={devices} />
+  </Router>
 )

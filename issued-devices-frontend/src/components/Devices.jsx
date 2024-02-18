@@ -1,14 +1,16 @@
 import { ListGroup } from 'react-bootstrap'
 import Device from './Device';
 
-const DeviceList = ({devices}) => {
+const Devices = ({devices}) => {
 
     return(
     <div style={{padding: 15}}>
         <h1>Devices</h1>
         <ListGroup variant="flush">
         {devices.map(device =>
-            <Device key={device.id} device={device} />
+         <ListGroup.Item key={device.id} action href={`/device/${device.id}`}>
+            {device.name}
+         </ListGroup.Item>
         )}
         </ListGroup>
     </div>
@@ -16,4 +18,4 @@ const DeviceList = ({devices}) => {
   
 }
 
-export default DeviceList
+export default Devices

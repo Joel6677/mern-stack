@@ -1,9 +1,14 @@
-import { ListGroup } from 'react-bootstrap';
-
 const Device = ({ device }) => {
+  console.log(device)
     return (
-      <ListGroup.Item action>{device.name}</ListGroup.Item>
+     <div>
+      <h2>{device.name}</h2>
+      <div>{device.manufacturer}</div>
+      <div>{device.number}</div>
+     </div>
     )
   }
   
   export default Device
+
+  
