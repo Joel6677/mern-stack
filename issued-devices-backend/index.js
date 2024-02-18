@@ -49,17 +49,45 @@ app.get('/api/devices/:id', (request, response) => {
     console.log(device)
     if (device) {
         response.json(device)
-      } else {
+    } else {
         response.status(404).end()
-      }
+    }
 })
 
+const generateId = () => {
+    const maxId = devices.length > 0
+        ? Math.max(...devices.map(d => d.id))
+        : 0
+    return maxId + 1
+  }
+
 app.post('/api/devices', (request, response) => {
-    const device = request.body
-    console.log(device)
-    response.json(device)
-  })
+
+    const body = request.body
+
+    if (!body.name) {
+      return response.status(400).json({ 
+        error: 'name missing' 
+      })
+    }
   
+    const device = {
+      id: generateId(),
+      name: body.name,
+      manufacturer: body.manufacturer,
+      number: body.number,
+      recipient_id: body.recipient_id,
+      date_of_issue: new Date(body.date_of_issue),
+      returning_date: new Date(body.returning_date),
+    }
+    
+    devices = devices.concat(device)
+
+    console.log(devices)
+  
+    response.json(device)
+})
+
 
 
 const PORT = 3001
