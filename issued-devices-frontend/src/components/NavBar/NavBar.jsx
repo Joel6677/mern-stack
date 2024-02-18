@@ -22,6 +22,9 @@ const NavBar = () => {
             <Nav.Link href="#notes" as="span">
               <Link style={padding} to="/devices">Devices</Link>
             </Nav.Link>
+            <Nav.Link href="#notes" as="span">
+              <Link style={padding} to="/deviceIssueForm">Device Issuance Form</Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

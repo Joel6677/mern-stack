@@ -37,7 +37,7 @@ const devices = [
   }
 ]
 
-const recipients= [
+const recipients = [
   {
     id: 1,
     name: "Jaakko",

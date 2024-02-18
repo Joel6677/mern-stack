@@ -55,6 +55,7 @@ const App = (props) => {
       <Routes>
         <Route path="/device/:id" element={<Device device={device} />} />
         <Route path="/devices" element={<Devices devices={devices} />} />
+        <Route path="/deviceIssueForm" element={<DeviceIssueForm/>} />
         <Route path="/" element={<Home />} />
       </Routes>
 
