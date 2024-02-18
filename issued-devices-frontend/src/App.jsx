@@ -3,8 +3,9 @@ import DeviceIssueForm from './components/DeviceIssueForm'
 import Devices from './components/Devices'
 import NavBar from './components/NavBar/NavBar'
 import Home from './components/Home/Home'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-import { useState } from 'react'
 
 import {
   Routes,
@@ -14,9 +15,16 @@ import {
 
 const App = (props) => {
 
-
   const [devices, setDevices] = useState(props.devices)
 
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/api/devices')
+      .then(response => {
+        console.log(response.data)
+      })
+  })
 
 
   const match = useMatch('/device/:id')
