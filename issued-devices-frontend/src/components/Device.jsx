@@ -1,5 +1,4 @@
 const Device = ({ device }) => {
-  console.log(device)
     return (
      <div>
       <h2>{device.name}</h2>

@@ -1,8 +1,8 @@
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, Form } from 'react-bootstrap'
 
 import {
     Link,
-  } from "react-router-dom"
+} from "react-router-dom"
 
 const padding = {
     padding: 5
@@ -11,25 +11,25 @@ const padding = {
 const NavBar = () => {
 
     return (
-    <div>
-     <Navbar collapseOnSelect expand="lg" bg="dark" variant="primary">
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home" as="span">
-              <Link style={padding} to="/">Home</Link>
-            </Nav.Link>
-            <Nav.Link href="#notes" as="span">
-              <Link style={padding} to="/devices">Devices</Link>
-            </Nav.Link>
-            <Nav.Link href="#notes" as="span">
-              <Link style={padding} to="/deviceIssueForm">Device Issuance Form</Link>
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      
-    </div>
+        <div>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="primary">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="#home" as="span">
+                            <Link style={padding} to="/">Home</Link>
+                        </Nav.Link>
+                        <Nav.Link href="#notes" as="span">
+                            <Link style={padding} to="/devices">Devices</Link>
+                        </Nav.Link>
+                        <Nav.Link href="#notes" as="span">
+                            <Link style={padding} to="/deviceIssueForm">Device Issuance Form</Link>
+                        </Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+
+        </div>
     )
 }
 
