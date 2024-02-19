@@ -5,7 +5,7 @@ import {
 } from "react-router-dom"
 
 const padding = {
-    padding: 5
+    padding: 5,
 }
 
 const NavBar = () => {
@@ -16,9 +16,6 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home" as="span">
-                            <Link style={padding} to="/">Home</Link>
-                        </Nav.Link>
                         <Nav.Link href="#notes" as="span">
                             <Link style={padding} to="/devices">Devices</Link>
                         </Nav.Link>
