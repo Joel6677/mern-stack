@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Table } from 'react-bootstrap'
 
 const Device = () => {
 
@@ -10,23 +11,33 @@ const Device = () => {
   })
   const device = devices.find(d => d.id === id)
 
-    return (
-      <div>
-        <h2>{device.name}</h2>
-        <h3>{device.number}</h3>
-      </div>
-    )
-
-    
-    // return (
-    //  <div>
-    //   <h2>{device.name}</h2>
-    //   <div>{device.manufacturer}</div>
-    //   <div>{device.number}</div>
-    //  </div>
-    // )
+  if (!device) {
+    return <div style={{ padding: 15 }}>Device not found</div>;
   }
-  
-  export default Device
 
-  
+  return (
+    <div style={{ padding: 15 }}>
+      <h2>Device information</h2>
+      <Table striped bordered>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>{device.name}</td>
+          </tr>
+          <tr>
+            <td>Manufacturer</td>
+            <td>{device.manufacturer}</td>
+          </tr>
+          <tr>
+            <td>Device number</td>
+            <td>{device.number}</td>
+          </tr>
+        </tbody>
+      </Table>
+    </div>
+  )
+
+}
+
+export default Device
+
