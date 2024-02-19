@@ -4,7 +4,7 @@ import Devices from './components/Devices'
 import NavBar from './components/NavBar/NavBar'
 import Home from './components/Home/Home'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import deviceService from './services/devices'
 
 
 import {
@@ -13,18 +13,17 @@ import {
   useMatch
 } from "react-router-dom"
 
-const App = (props) => {
+const App = () => {
 
-  const [devices, setDevices] = useState(props.devices)
+  const [devices, setDevices] = useState([])
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/api/devices')
-      .then(response => {
-        console.log(response.data)
-      })
-  })
+    deviceService.getAll().then(devices =>
+      {setDevices(devices)
+      console.log(devices)}
+      
+    )
+  },[])
 
 
   const match = useMatch('/device/:id')
