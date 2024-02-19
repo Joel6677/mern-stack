@@ -5,6 +5,8 @@ import NavBar from './components/NavBar/NavBar'
 import Home from './components/Home/Home'
 import { useState, useEffect } from 'react'
 import deviceService from './services/devices'
+import { initializeDevices } from './reducers/deviceReducer'
+import { useSelector, useDispatch } from 'react-redux'
 
 
 import {
@@ -15,31 +17,21 @@ import {
 
 const App = () => {
 
-  const [devices, setDevices] = useState([])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    deviceService.getAll().then(devices =>
-      {setDevices(devices)
-      console.log(devices)}
-      
-    )
-  },[])
+    dispatch(initializeDevices()) 
+  }, [dispatch]) 
 
-
-  const match = useMatch('/device/:id')
-  const device = match
-    ? devices.find(device => device.id === Number(match.params.id))
-    : null
 
   return (
 
     <div>
-
       <NavBar/>
 
       <Routes>
-        <Route path="/device/:id" element={<Device device={device} />} />
-        <Route path="/devices" element={<Devices devices={devices} />} />
+        {/* <Route path="/devices/:id" element={<Device device={devices} />} /> */}
+        <Route path="/devices" element={<Devices/>} />
         <Route path="/deviceIssueForm" element={<DeviceIssueForm/>} />
         <Route path="/" element={<Home />} />
       </Routes>
