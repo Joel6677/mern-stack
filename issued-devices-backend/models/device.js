@@ -8,7 +8,10 @@ const deviceSchema = new mongoose.Schema({
     },
     manufacturer: String,
     number: Number,
-    recipient_id: Number,
+    recipient: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recipient'
+    },
     date_of_issue: Date,
     returning_date: Date
 })
