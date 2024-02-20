@@ -15,6 +15,7 @@ const Device = () => {
     return <div style={{ padding: 15 }}>Device not found</div>;
   }
 
+
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('fi-FI')
   }

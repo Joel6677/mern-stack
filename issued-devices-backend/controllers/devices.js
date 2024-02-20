@@ -18,10 +18,6 @@ devicesRouter.get('/', async (request, response) => {
 devicesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  console.log('body.number: ', body.number)
-
-  const all = await Device.find({})
-
   const existingDevice = await Device.findOne({ number: body.number })
 
   if (existingDevice) {
@@ -37,10 +33,13 @@ devicesRouter.post('/', async (request, response) => {
       date_of_issue: new Date(body.date_of_issue),
       returning_date: new Date(body.returning_date)
     });
+    
 
     const savedIssuance = await issuance.save();
 
+
     existingDevice.issuances.push(savedIssuance._id)
+
 
     const updatedDevice = await existingDevice.save()
 
@@ -50,6 +49,7 @@ devicesRouter.post('/', async (request, response) => {
     return response.status(201).json(updatedDevice)
 
   } else {
+
 
     const recipient = await Recipient.findById(body.recipient)
 
@@ -65,6 +65,7 @@ devicesRouter.post('/', async (request, response) => {
 
     const savedIssuance = await issuance.save()
 
+
     const device = new Device({
       name: body.name,
       manufacturer: body.manufacturer,
@@ -72,7 +73,6 @@ devicesRouter.post('/', async (request, response) => {
       issuances: [savedIssuance._id]
     })
 
-    console.log(device)
 
     const savedDevice = await device.save()
     recipient.devices = recipient.devices.concat(savedDevice._id)
