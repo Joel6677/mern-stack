@@ -6,6 +6,11 @@ const getAll = async () => {
   return response.data
 }
 
+const findById = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response.data;
+};
+
 const createNew = async (newObject) => {
   const response = await axios.post(baseUrl, newObject)
   return response.data

@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   Routes,
   Route,
-  useMatch
 } from "react-router-dom"
 
 const App = () => {
@@ -22,8 +21,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeDevices())
-    dispatch(initializeRecipients())
-  }, [dispatch]) 
+  }, []) 
 
 
   return (

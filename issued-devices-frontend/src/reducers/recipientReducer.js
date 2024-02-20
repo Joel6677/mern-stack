@@ -1,6 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import recipientService from '../services/recipients'
+
+
+export const createRecipient = createAsyncThunk(
+    'recipients/createRecipient',
+    async (content, thunkAPI) => {
+      try {
+        const newRecipient = await recipientService.createNew(content)
+        return newRecipient
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message)
+      }
+    }
+  )
 
 const recipientSlice = createSlice({
     name: 'recipients',
@@ -22,12 +35,6 @@ const recipientSlice = createSlice({
     }
   }
   
-  export const createRecipient = content => {
-    return async dispatch => {
-      const newRecipient = await recipientService.createNew(content)
-      dispatch(appendRecipient(newRecipient))
-    }
-  }
   
   export const { appendRecipient, setRecipients } = recipientSlice.actions
   
