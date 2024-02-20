@@ -16,6 +16,15 @@ const DeviceIssueForm = () => {
     event.preventDefault()
 
     const formData = new FormData(event.target);
+
+    // const recipientObject = {
+    //   name: formData.get('recipientName'),
+    //   department: formData.get('department')
+    // }
+
+    // dispatch(createRecipient(recipientObject))
+
+
     const deviceObject = {
       name: formData.get('name'),
       manufacturer: formData.get('manufacturer'),
@@ -24,10 +33,10 @@ const DeviceIssueForm = () => {
       department: formData.get('department'),
       date_of_issue: formData.get('dateOfIssue'),
       returning_date: formData.get('returningDate')
-    };
+    }
 
-    dispatch(createDevice(deviceObject));
-    event.target.reset(); 
+    dispatch(createDevice(deviceObject))
+    event.target.reset()
     navigate('/')
   }
 

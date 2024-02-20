@@ -7,10 +7,10 @@ import {
 
 const Devices = () => {
 
-    const dispatch = useDispatch()
     const devices = useSelector(state => {
         return state.devices
     })
+
     const [searchTerm, setSearchTerm] = useState('');
 
     const filteredDevices = devices.filter(device =>
@@ -20,6 +20,8 @@ const Devices = () => {
     const handleSearchChange = event => {
         setSearchTerm(event.target.value);
     };
+
+
 
     return (
         <div style={{ padding: 15 }}>

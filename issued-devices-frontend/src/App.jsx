@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import { useState, useEffect } from 'react'
 import deviceService from './services/devices'
 import { initializeDevices } from './reducers/deviceReducer'
+import { initializeRecipients } from './reducers/recipientReducer'
 import { useSelector, useDispatch } from 'react-redux'
 
 
@@ -20,7 +21,8 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initializeDevices()) 
+    dispatch(initializeDevices())
+    dispatch(initializeRecipients())
   }, [dispatch]) 
 
 
