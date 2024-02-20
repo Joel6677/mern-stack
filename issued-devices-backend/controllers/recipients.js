@@ -10,7 +10,8 @@ recipientsRouter.post('/', async (request, response) => {
     
     const recipient = new Recipient({
         name,
-        department
+        department,
+        devices: []
     })
   
     const savedRecipient = await recipient.save()
@@ -20,6 +21,7 @@ recipientsRouter.post('/', async (request, response) => {
   
   recipientsRouter.get('/', async (request, response) => {
     const recipients = await Recipient.find({}).populate('devices')
+    console.log('rec', recipients)
     response.json(recipients)
   })
 

@@ -1,42 +1,81 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-if (process.argv.length<3) {
-  console.log('give password as argument')
-  process.exit(1)
+// Check if the password is provided
+if (process.argv.length < 3) {
+  console.log('Please provide the password as an argument.');
+  process.exit(1);
 }
 
-const password = process.argv[2]
+// Get the password from command-line arguments
+const password = process.argv[2];
 
-const url =
-  `mongodb+srv://joelheusala:${password}@cluster0.cm4zg8j.mongodb.net/deviceApp?retryWrites=true&w=majority`
+// MongoDB connection URL
+const url = `mongodb+srv://joelheusala:${password}@cluster0.cm4zg8j.mongodb.net/deviceApp?retryWrites=true&w=majority`;
 
-mongoose.set('strictQuery', false)
-mongoose.connect(url)
+// Connect to MongoDB
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Define schema for Issuance
+const issuanceSchema = new mongoose.Schema({
+    recipient: { type: mongoose.Schema.Types.ObjectId, ref: 'Recipient' },
+    date_of_issue: Date,
+    returning_date: Date
+});
+
+// Define schema for Device
 const deviceSchema = new mongoose.Schema({
-  name: String,
-  manufacturer: String,
-  number: Number,
-  recipient_id: Number,
-  date_of_issue: Date,
-  returning_date: Date
-})
+    name: String,
+    manufacturer: String,
+    device_number: { type: String, unique: true },
+    issuances: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Issuance' }]
+});
 
-const Device = mongoose.model('Device', deviceSchema)
+// Define schema for Recipient
+const recipientSchema = new mongoose.Schema({
+    name: String,
+    department: String,
+    devices: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Device' }]
+});
 
-const device = new Device({
+// Create models based on schemas
+const Issuance = mongoose.model('Issuance', issuanceSchema);
+const Device = mongoose.model('Device', deviceSchema);
+const Recipient = mongoose.model('Recipient', recipientSchema);
+
+// Create a new device
+const deviceData = {
     name: 'Laptop',
     manufacturer: 'Apple',
-    number: 123,
-    recipient_id: 1,
-    date_of_issue: new Date('03/25/2019'),
-    returning_date: new Date('04/10/2021')
-})
+    device_number: '123456',
+    issuances: [] // No initial issuances
+};
 
+// Create a new recipient
+const recipientData = {
+    name: 'John Doe',
+    department: 'IT',
+    devices: [] // No initial devices
+};
 
-Device.find({}).then(result => {
-    result.forEach(device => {
-      console.log(device)
-    })
-    mongoose.connection.close()
-  })
+// Function to insert data into the database
+async function insertData() {
+    try {
+        // Create new device
+        const device = new Device(deviceData);
+        const savedDevice = await device.save();
+        console.log('Device saved successfully:', savedDevice);
+
+        // Create new recipient
+        const recipient = new Recipient(recipientData);
+        const savedRecipient = await recipient.save();
+        console.log('Recipient saved successfully:', savedRecipient);
+
+        // Close the MongoDB connection
+        mongoose.connection.close();
+    } catch (error) {
+        console.error('Error saving data:', error);
+    }
+}
+
+// Insert data into the database
+insertData();

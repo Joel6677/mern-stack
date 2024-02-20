@@ -3,25 +3,26 @@ const mongoose = require('mongoose')
 const deviceSchema = new mongoose.Schema({
     name: {
         type: String,
-        minlength: 1,
         required: true
     },
     manufacturer: String,
-    number: Number,
-    recipient: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Recipient'
+    number: {
+        type: Number,
+        unique: true,
+        required: true
     },
-    date_of_issue: Date,
-    returning_date: Date
-})
+    issuances: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Issuance'
+    }]
+});
 
-deviceSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString()
-        delete returnedObject._id
-        delete returnedObject.__v
-    }
-})
+deviceSchema.methods.toJSON = function () {
+    const recipientObject = this.toObject()
+    recipientObject.id = recipientObject._id.toString()
+    delete recipientObject._id
+    delete recipientObject.__v
+    return recipientObject
+};
 
 module.exports = mongoose.model('Device', deviceSchema)
